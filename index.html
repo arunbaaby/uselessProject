@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Read Story with Torch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff;
+            cursor: none;
+            font-family: 'Times New Roman', serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #content {
+            max-width: 80%;
+            margin: 20px auto;
+            padding: 15px;
+            color: #000;
+        }
+
+
+        .story-text {
+            line-height: 1.8;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <p class="story-text">
+            The storm was fierce as Alex arrived at the old mansion, its windows dark and empty. The air felt thick and
+            strange, like something was watching him. His uncle had sent him a strange letter before he died, asking
+            Alex to come here to find a family secret.
+        </p>
+
+        <p class="story-text">
+            As he pushed open the heavy door, a cold gust hit him, and his flashlight flickered. Shadows seemed to shift
+            on the walls, as if they were alive. The house was silent, except for a faint creaking sound upstairs. Alex
+            climbed the staircase, each step moaning under his weight.
+        </p>
+
+        <p class="story-text">
+            At the end of a dark hallway was his uncle’s study. Inside, dust covered everything except a small, old
+            chest on the desk. Curiosity got the best of him, and he opened it. Inside were a bundle of letters, a
+            broken compass, and an old photograph of his uncle, staring out with eyes that felt strangely alive.
+        </p>
+
+        <p class="story-text">
+            Just then, he heard slow footsteps coming down the hall, dragging and heavy. His heart raced as a low,
+            whispering voice said his name. He turned, but no one was there. The air felt colder, like something was
+            right behind him.
+        </p>
+
+        <p class="story-text">
+            Suddenly, the letters in the chest scattered across the floor, as if blown by a breeze, though the windows
+            were closed. Among them, he found a diary with a single red page. The message read: "To whoever finds this,
+            beware. This house keeps its guests forever."
+        </p>
+
+        <p class="story-text">
+            The footsteps grew louder, coming closer. He dropped the diary and ran for the door, feeling shadows reach
+            out for him. As he neared the exit, a cold hand brushed his shoulder, and a voice whispered, "You belong
+            here now."
+        </p>
+
+        <p class="story-text">
+            With all his strength, Alex burst out of the door into the rain, running as fast as he could down the
+            overgrown path. The mansion stood behind him, its windows glowing faintly, as if watching him leave. But
+            even as he escaped, he could still hear it—a faint whisper, promising it would find him again.
+        </p>
+
+    </div>
+    <!--this is the spotlight element-->
+    <div id="canvas-container">
+        <canvas id="spotlight"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('spotlight');
+        const ctx = canvas.getContext('2d');
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        // canvas resize
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY + window.scrollY;
+        });
+
+        // Smooth animation
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        function animate() {
+            // Smooth movement
+            mouseX = lerp(mouseX, targetX, 0.1);
+            mouseY = lerp(mouseY, targetY, 0.1);
+
+            // Clear canvas
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.97)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Create spotlight
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 60, 0, Math.PI * 2);
+            ctx.globalCompositeOperation = 'destination-out';
+
+            // Create gradient for smooth edge
+            const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 60);
+            gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+            gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.9)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.restore();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Handle scrolling
+        window.addEventListener('scroll', () => {
+            targetY = mouseY + window.scrollY;
+        });
+
+        // Start animation
+        animate();
+
+        // Prevent right-click menu
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+    </script>
+</body>
+
+</html>
