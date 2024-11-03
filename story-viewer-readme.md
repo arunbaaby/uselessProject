@@ -1,6 +1,6 @@
 # Interactive Story Viewer with Spotlight Effect
 
-A story which you can only read when you move the spotlight which is atached to the cursor.But this only works well in the desktop device
+A Horror story which you can only read when you move the spotlight which is atached to the cursor.But this only works well in the desktop device
 
 ## Features
 
