@@ -1,10 +1,10 @@
 # Interactive Story Viewer with Spotlight Effect
 
-A Horror story which you can only read when you move the spotlight which is atached to the cursor.But this only works well in the desktop device
+A Horror story which you can only read when you move the spotlight which is atached to the cursor.But this only works well on the desktop devices as cursor is not available on the smartphone.This should be duely noted.
 
 ## Features
 
-- Dynamic spotlight effect that follows cursor movement
+- Spotlight effect that follows cursor movement
 - Smooth spotlight animation with gradient edges
 - Responsive design that works across different screen sizes
 - Clean, readable typography optimized for storytelling
