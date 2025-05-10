@@ -1,6 +1,7 @@
 # Interactive Story Viewer with Spotlight Effect
 
-A Horror story which you can only read when you move the spotlight which is atached to the cursor.But this only works well on the desktop devices as cursor is not available on the smartphone.This should be duely noted.
+A Horror story which you can only read when you move the spotlight which is atached to the cursor.But this only works well on the desktop devices as cursor is not available on the smartphone.This should be duely noted. This project was built at the "Useless Projects" Hackathon at Tinkerspace Kochi
+[![💻 Built at TinkerSpace](https://img.shields.io/badge/Built%20at-TinkerSpace-blueviolet?style=for-the-badge&label=%F0%9F%92%BBBuilt%20at&labelColor=turquoise&color=white)](https://tinkerhub.org/tinkerspace)
 
 ## Features
 
